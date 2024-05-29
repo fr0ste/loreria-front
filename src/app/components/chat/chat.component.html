@@ -11,12 +11,17 @@
       </div>
     </div>
     <ul class="messages">
-      <li class="message right">
-        <div class="avatar"></div>
-        <div class="text_wrapper">
-          <div class="text">Hola</div>
-        </div>
-      </li>
+      @for (item of messageList; track $index) {
+        @if (item.message_side === 'reciver') {
+            <li class="message right"></li>
+        } 
+         <li class="message left">
+            <div class="avatar"></div>
+            <div class="text_wrapper">
+              <div class="text">{{item.message}}</div>
+            </div>
+          </li>
+      }
     </ul>
     <div class="bottom_wrapper clearfix">
       <div class="message_input_wrapper">

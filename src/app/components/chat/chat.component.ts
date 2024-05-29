@@ -5,12 +5,15 @@ import { CompatClient, Stomp } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
   imports: [
-  FormsModule
+  FormsModule,
+  NgFor,
+  NgIf
   ],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css',
@@ -34,6 +37,10 @@ export class ChatComponent implements OnInit{
       this.chatService.joinRoom("ABC");
 
       this.userId = this.route.snapshot.params["userId"];
+
+      this.listenerMessage();
+
+      console.log("message list: ", this.messageList);
   }
 
   public sendMessage() {
@@ -47,6 +54,16 @@ export class ChatComponent implements OnInit{
 
     this.messageInput = "";
 
+  }
+
+  public listenerMessage(){
+    this.chatService.getMessageSubject().subscribe((messages: any ) => {
+      this.messageList = messages.map((item: any) => ({
+        ...item,
+        message_side: item.user === this.userId ? 'sender' : 'reciver'
+      }))
+    });
+    console.log(this.messageList);
   }
 
 

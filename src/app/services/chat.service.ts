@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { CompatClient, Stomp } from '@stomp/stompjs';
+import { BehaviorSubject } from 'rxjs';
 import SockJS from 'sockjs-client';
-import { ChatMessage } from '../models/chat-message';
+import { ChatMessage } from './../models/chat-message';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
+  /**
+   * variables
+   */
+  private stompClient!: CompatClient;
+  private messageSubject: BehaviorSubject<ChatMessage[]> = new BehaviorSubject<
+    ChatMessage[]
+  >([]);
+
   constructor() {
     this.initConnectionSocket();
   }
-
-  private stompClient!: CompatClient;
 
   initConnectionSocket() {
     const url = 'http://localhost:3000/chat';
@@ -23,7 +30,13 @@ export class ChatService {
     this.stompClient.connect({}, () => {
       this.stompClient.subscribe(`/topic/${roomId}`, (messages: any) => {
         const messageContent = JSON.parse(messages.body);
-        console.log('messageSended: ', messageContent);
+        const currentMessage = this.messageSubject.getValue();
+
+        currentMessage.push(messageContent);
+
+        this.messageSubject.next(currentMessage);
+
+        console.log(currentMessage);
       });
     });
   }
@@ -35,5 +48,9 @@ export class ChatService {
       {},
       JSON.stringify(chatMessage)
     );
+  }
+
+  getMessageSubject() {
+    return this.messageSubject.asObservable();
   }
 }
