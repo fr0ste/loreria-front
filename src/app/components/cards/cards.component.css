@@ -1,0 +1,56 @@
+img {
+  height: 100%;
+  width: 100%;
+}
+.card-block {
+  position: relative;
+}
+
+li {
+  min-height: 700px;
+  width: 520px;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  text-align: center;
+  box-shadow: 0 0 3px 3px rgba(200, 200, 200, 1);
+  left: 100px;
+  transition: all cubic-bezier(0.25, 0.64, 0.09, 0.97) 0.5s;
+  top: 0;
+  margin-left: -200px;
+}
+ul{
+  list-style: none;
+}
+.drop {
+  left: 100% !important;
+  opacity: 0;
+  transform: rotate(35deg) !important;
+}
+
+h1 {
+  margin-top: 50px;
+  color: #000000;
+  text-shadow: 1px 1px 0px #333, 2px 2px #333, 3px 3px 0px #333;
+  min-height: 150px;
+}
+
+.next-card {
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.div-custom {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+
+.next {
+  background-color: #04AA6D;
+  color: white;
+}
+
