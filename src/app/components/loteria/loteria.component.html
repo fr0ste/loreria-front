@@ -1,0 +1,11 @@
+@if(!playerName){
+<div>
+  <app-player-form (joinGame)="handleJoinGame($event)"></app-player-form>
+</div>
+} 
+
+@if (playerName && gameId) {
+<div>
+  <app-game-board [playerName]="playerName" [gameId]="gameId"></app-game-board>
+</div>
+}
