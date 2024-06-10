@@ -1,0 +1,29 @@
+form {
+  width: 350px;
+  height: 500px;
+  position: relative;
+  margin: 10px; /* Espacio entre los formularios */
+}
+
+.form-background {
+  background-image: url('../img/form.jpg');
+  background-size: cover; /* Ajusta la imagen al tamaño del formulario */
+  background-position: center; /* Centra la imagen en el formulario */
+  padding: 100px; /* Opcional: Añade un poco de padding */
+}
+
+input {
+  margin-top: 100px;
+  margin-right: 0px; /* Ajusta este valor según sea necesario */
+}
+.game-id-container {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.game-id {
+  color: white;
+  margin: 0; /* Asegúrate de que no haya margen alrededor del texto */
+}

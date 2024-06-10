@@ -1,0 +1,6 @@
+<div id="bg"></div>
+<div id="content">
+  <div *ngFor="let game of games">
+    <app-card-server [gameId]="game.gameId"></app-card-server>
+  </div>
+</div>
