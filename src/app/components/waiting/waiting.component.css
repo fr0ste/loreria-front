@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 90vh;
     background-image: url('cuadro.jpg');     /* Fondo */
     background-size: cover;    /* Para cubrir todo el fondo */
     background-position: center;    /* Centra la imagen */
@@ -55,7 +55,7 @@ h2 {
     width: 35%;    /* ajusta el ancho según tu preferencia */
     height: auto;    /* para mantener la proporción */
     position: absolute;     /* ajusta la posición según tus necesidades */
-    top: 25%;    /* ajusta la distancia desde la parte superior */
+    top: 20%;    /* ajusta la distancia desde la parte superior */
     left: 50%;     /* ajusta la distancia desde la izquierda */
     transform: translate(-50%, -50%);
         /* Centra la imagen horizontal y verticalmente */
@@ -65,11 +65,11 @@ h2 {
     font-size: 3em;
     color: #000000;
     text-align: center;
-    animation: fadeInOut 4s ease infinite;     /* Animación de fadeInOut con duración de 4 segundos */
+    animation: fadeInOut 2s ease infinite;     /* Animación de fadeInOut con duración de 2 segundos */
     opacity: 0;     /* Empieza con opacidad 0 para que se vea que aparece */
     position: absolute;     /* Establece la posición absoluta */
-    top: -40%;     /* Define la distancia desde la parte superior */
-    left: 12%;     /* Centra el texto horizontalmente */
+    top: -50%;     /* Define la distancia desde la parte superior */
+    left: 10%;     /* Centra el texto horizontalmente */
     transform: translateX(-50%);     /* Centra el texto horizontalmente */
 }
 
