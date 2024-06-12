@@ -3,7 +3,9 @@ import { ChatComponent } from './components/chat/chat.component';
 import { TableComponent } from './components/table/table.component';
 import { CardsComponent } from './components/cards/cards.component';
 import { LoteriaComponent } from './components/loteria/loteria.component';
+import { WaitingComponent } from './components/waiting/waiting.component';
 import { LobbyPlayerComponent } from './components/lobby-player/lobby-player.component';
+
 
 export const routes: Routes = [
   {
@@ -24,5 +26,9 @@ export const routes: Routes = [
   },{ 
     path: '',
     component: LoteriaComponent
+  },
+  {
+    path: 'waiting',
+    component: WaitingComponent
   }
 ];

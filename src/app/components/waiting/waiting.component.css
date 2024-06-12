@@ -1,0 +1,88 @@
+body {
+    position: relative;
+    /* Para posicionar correctamente los contenedores */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background-image: url('cuadro.jpg');     /* Fondo */
+    background-size: cover;    /* Para cubrir todo el fondo */
+    background-position: center;    /* Centra la imagen */
+}
+
+.container {
+    position: absolute;
+    width: 50%;     /* Ajusta el ancho del contenedor según tu preferencia */
+    height: 50%;     /* Ajusta el alto del contenedor según tu preferencia */
+    display: flex;
+    top: 85%;     /* Ajusta la distancia desde la parte superior */
+    left: 73%;     /* Ajusta la distancia desde la izquierda */
+    transform: translate(-50%, -50%);     /* Centra el contenedor horizontal y verticalmente */
+}
+
+
+.container span {
+    position: absolute;
+    left: 0;
+    width: 10px;     /* Anchura reducida */
+    height: 2px;    /* Altura reducida */
+    background: #2c4766;
+    border-radius: 18px;
+    transform-origin: 30px;     /* Ajuste del punto de origen de la transformación */
+    transform: scale(2.2) rotate(calc(var(--i) * (360deg / 50)));
+    animation: animateBlink 2s linear infinite;     /* Aumenta el tiempo de duración */
+    animation-delay: calc(var(--i) * (4s / 100));     /* Ajusta el retraso de la animación */
+}
+
+
+@keyframes animateBlink {
+    0% {
+        background: #0ef;
+    }
+
+    25% {
+        background: #2c4766;
+    }
+}
+
+h2 {
+    font-size: 2em;
+    color: #1f293a;
+    text-align: center;
+}
+
+.logo {
+    width: 35%;    /* ajusta el ancho según tu preferencia */
+    height: auto;    /* para mantener la proporción */
+    position: absolute;     /* ajusta la posición según tus necesidades */
+    top: 20%;    /* ajusta la distancia desde la parte superior */
+    left: 50%;     /* ajusta la distancia desde la izquierda */
+    transform: translate(-50%, -50%);
+        /* Centra la imagen horizontal y verticalmente */
+}
+
+.animated-text {
+    font-size: 3em;
+    color: #000000;
+    text-align: center;
+    animation: fadeInOut 2s ease infinite;     /* Animación de fadeInOut con duración de 2 segundos */
+    opacity: 0;     /* Empieza con opacidad 0 para que se vea que aparece */
+    position: absolute;     /* Establece la posición absoluta */
+    top: -50%;     /* Define la distancia desde la parte superior */
+    left: 10%;     /* Centra el texto horizontalmente */
+    transform: translateX(-50%);     /* Centra el texto horizontalmente */
+}
+
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0;
+        /* Empieza y termina con opacidad 0 para que se vea que aparece y desaparece */
+    }
+
+    50% {
+        opacity: 1;
+        /* Al 50% de la animación, la opacidad será 1 para que se vea que está completamente visible */
+    }
+}
