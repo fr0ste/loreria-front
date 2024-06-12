@@ -1,0 +1,24 @@
+<div class="container">
+  <ul class="card-block">
+    <li
+      *ngFor="let card of cards1; let i = index"
+      [ngClass]="{ drop: droppedCard === i }"
+      [ngStyle]="{
+        left: card.left,
+        'z-index': card.zIndex,
+        transform: card.transform
+      }"
+    >
+      <h1>{{ card.phrase }}</h1>
+      <img [src]="cards1[currentIndex].image" alt="Imagen" />
+      <button
+        type="button"
+        class="next-card next"
+        (click)="nextCardLoteria(i)"
+        [disabled]="i !== 0"
+      >
+        Siguiente >>
+      </button>
+    </li>
+  </ul>
+</div>
