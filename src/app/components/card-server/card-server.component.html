@@ -1,0 +1,8 @@
+<form (ngSubmit)="onSubmit()" class="form-background">
+    <div class="game-id-container">
+      <p class="game-id">Game ID: {{ gameId }}</p>
+    </div>
+    <input [(ngModel)]="playerName" name="playerName" placeholder="Nombre del jugador" required>
+    <button type="submit">Unirse al Juego</button>
+  </form>
+  

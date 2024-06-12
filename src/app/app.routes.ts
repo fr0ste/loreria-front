@@ -3,7 +3,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { TableComponent } from './components/table/table.component';
 import { CardsComponent } from './components/cards/cards.component';
 import { LoteriaComponent } from './components/loteria/loteria.component';
-
+import { LobbyPlayerComponent } from './components/lobby-player/lobby-player.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +13,10 @@ export const routes: Routes = [
   {
     path: 'tablero',
     component: TableComponent
+  },
+  {
+    path: 'lobby',
+    component: LobbyPlayerComponent
   },
   {
     path: 'cards',
