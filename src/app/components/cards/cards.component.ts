@@ -28,15 +28,14 @@ export class CardsComponent implements OnInit {
   ngOnInit(): void {
     this.gameId = this.route.snapshot.paramMap.get('id');
 
-    this.webSocketService.joinGame(this.gameId || '');
-
     this.webSocketService.getGame(this.gameId || '').subscribe((game: Game) => {
       this.game = game;
       console.log('Game state:', game);
       this.webSocketService.joinGame(this.gameId || '');
       this.initializeCards();
+      this.listenerMessage();
     });
-    this.listenerMessage();
+    
   }
 
   initializeCards() {
