@@ -1,0 +1,20 @@
+.card {
+  width: 400px;
+  background-color: rgb(175, 144, 86);
+  font-size: 22px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+* {
+  text-align: center;
+}
+
+.card-header {
+  font-size: 40px !important;
+}
