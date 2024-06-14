@@ -20,7 +20,7 @@ import { ConnectRequest } from '../../services/models/connect.model';
   })
   export class LobbyPlayerComponent implements OnInit {
     games: Games[] = [];
-    url = "http://localhost:3000";
+    url = "http://132.18.53.92:3000";
     private apiService = inject(ApiService<{}>);
     private webSocketService = inject(WebSocketService)
     
@@ -58,7 +58,7 @@ import { ConnectRequest } from '../../services/models/connect.model';
       .subscribe({
         next: (response) => {
           this.games=response
-          console.log("response", response.gameId, player.player.username)
+          // console.log("response", response.gameId, player.player.username)
           this.router.navigate(['table', response.gameId, player.player.username]);
         },
         error: (error) => {
@@ -85,7 +85,6 @@ import { ConnectRequest } from '../../services/models/connect.model';
         next: (response) => {
           this.games=response
           console.log("response", this.games)
-          // console.log(this.questionsPathologicalPersonData);
         },
         error: (error) => {
           console.error('Error en la autenticación:', error);

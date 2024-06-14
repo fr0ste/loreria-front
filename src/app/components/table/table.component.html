@@ -1,7 +1,6 @@
- <div class="main_container">
+<!-- <div class="main_container">
             <div class="card_container" id="carta_1">
                 <div class="card">
-                    <!-- <img src="../../../assets/images/1.jpg" alt=""  (click)="marcaCasilla(1)">"> -->
                     <img src="../../../assets/images/1.jpg" alt=""  onclick="marcaCasilla(1)">
                     <img src="../../../assets/images/10.jpg" alt="" onclick="marcaCasilla(2)">
                     <img src="../../../assets/images/14.jpg" alt="" onclick="marcaCasilla(3)">
@@ -19,4 +18,12 @@
                     <img src="../../../assets/images/2.jpg" alt="" onclick="marcaCasilla(15)">
                     <img src="../../../assets/images/18.jpg" alt="" onclick="marcaCasilla(16)">
                 </div>
-            </div>
+            </div> -->
+
+<div class="main_container">
+  <div class="card_container" id="carta_1">
+    @for (item of deckPlayer; track $index) {
+    <img [src]="'../../../assets/images/' + item.image + 'jpg'" />
+    }
+  </div>
+</div>
