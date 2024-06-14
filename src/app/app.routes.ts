@@ -14,7 +14,7 @@ export const routes: Routes = [
     component: ChatComponent,
   },
   {
-    path: 'tablero',
+    path: 'table/:game/:player',
     component: TableComponent
   },
   {

@@ -1,6 +1,10 @@
 <div id="bg"></div>
 <div id="content">
   <div *ngFor="let game of games">
-    <app-card-server [gameId]="game.gameId"></app-card-server>
+    <app-card-server
+      [gameId]="game.gameId"
+      (joinGame)="onJoinGame($event)"
+    ></app-card-server>
+    <!-- Escucha el evento y llama a la función onJoinGame -->
   </div>
 </div>

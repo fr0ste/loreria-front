@@ -10,12 +10,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './card-server.component.css'
 })
 export class CardServerComponent {
-  @Input() gameId?: number; // Asegúrate de tener esta entrada para gameId
-  @Output() joinGame = new EventEmitter<string>();
+  @Input() gameId: number = 0; // Asegúrate de tener esta entrada para gameId
+  @Output() joinGame = new EventEmitter<any>();
   playerName: string = '';
 
   onSubmit() {
-    this.joinGame.emit(this.playerName);
-
+    // Emite un objeto con ambos parámetros
+    this.joinGame.emit({ playerName: this.playerName, gameId: this.gameId });
   }
 }
