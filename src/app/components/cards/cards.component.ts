@@ -1,17 +1,8 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-
-interface Card {
-  idCard: number;
-  image: string;
-  phrase: string;
-  name: string;
-  number: number;
-  state: string;
-  left?: string;
-  zIndex?: number;
-  transform?: string;
-}
+import { ActivatedRoute } from '@angular/router';
+import { WebSocketService } from '../../services/web-socket.service';
+import { Game } from '../../models/games';
 
 @Component({
   selector: 'app-cards',
@@ -21,113 +12,67 @@ interface Card {
   styleUrl: './cards.component.css',
 })
 export class CardsComponent implements OnInit {
-  cards1: Card[] = [
-    {
-      idCard: 1,
-      image: './assets/images/1.jpg',
-      phrase: 'This is a phrase 1',
-      name: 'Card 1',
-      number: 1,
-      state: 'active',
-    },
-    {
-      idCard: 2,
-      image: './assets/images/2.jpg',
-      phrase: 'This is a phrase 2',
-      name: 'Card 2',
-      number: 2,
-      state: 'active',
-    },
-    {
-      idCard: 3,
-      image: './assets/images/3.jpg',
-      phrase: 'This is a phrase 3',
-      name: 'Card 3',
-      number: 3,
-      state: 'active',
-    },
-    {
-      idCard: 4,
-      image: './assets/images/4.jpg',
-      phrase: 'This is a phrase 4',
-      name: 'Card 4',
-      number: 4,
-      state: 'active',
-    },
-    {
-      idCard: 5,
-      image: './assets/images/5.jpg',
-      phrase: 'This is a phrase 5',
-      name: 'Card 5',
-      number: 5,
-      state: 'active',
-    },
-    {
-      idCard: 6,
-      image: './assets/images/6.jpg',
-      phrase: 'This is a phrase 6',
-      name: 'Card 6',
-      number: 6,
-      state: 'active',
-    },
-    {
-      idCard: 7,
-      image: './assets/images/7.jpg',
-      phrase: 'This is a phrase 7',
-      name: 'Card 7',
-      number: 7,
-      state: 'active',
-    },
-    {
-      idCard: 8,
-      image: './assets/images/8.jpg',
-      phrase: 'This is a phrase 8',
-      name: 'Card 8',
-      number: 8,
-      state: 'active',
-    },
-    {
-      idCard: 9,
-      image: './assets/images/9.jpg',
-      phrase: 'This is a phrase 9',
-      name: 'Card 9',
-      number: 9,
-      state: 'active',
-    },
-    {
-      idCard: 10,
-      image: './assets/images/10.jpg',
-      phrase: 'This is a phrase 10',
-      name: 'Card 10',
-      number: 10,
-      state: 'active',
-    },
-  ];
-
   droppedCard: number | null = null;
 
   currentIndex = 0;
 
+  public gameId!: string | null;
+
+  game!: Game;
+
+  constructor(
+    private route: ActivatedRoute,
+    private webSocketService: WebSocketService
+  ) {}
+
   ngOnInit(): void {
-    this.initializeCards();
+    this.gameId = this.route.snapshot.paramMap.get('id');
+
+    this.webSocketService.joinGame(this.gameId || '');
+
+    this.webSocketService.getGame(this.gameId || '').subscribe((game: Game) => {
+      this.game = game;
+      console.log('Game state:', game);
+      this.webSocketService.joinGame(this.gameId || '');
+      this.initializeCards();
+    });
+    this.listenerMessage();
   }
 
   initializeCards() {
-    let len = this.cards1.length;
+    let len = this.game.deck.cards.length;
     let left = -10;
     let s = 10;
     for (let i = len - 1; i >= 0; i--) {
-      this.cards1[i].left = (left += 0) + 'px';
-      this.cards1[i].zIndex = len - i;
+      this.game.deck.cards[i].left = (left += 0) + 'px';
+      this.game.deck.cards[i].zIndex = len - i;
     }
   }
 
   nextCardLoteria(index: number) {
+    this.popCard();
     this.droppedCard = index;
     setTimeout(() => {
-      this.cards1.splice(index, 1);
+      this.game.deck.cards.splice(index, 1);
       this.droppedCard = null;
       this.initializeCards();
     }, 500);
+  }
+
+  popCard() {
+    this.webSocketService.popCard(this.gameId || '').subscribe((game) => {
+      console.log('Card popped:', game);
+    });
+  }
+
+  public listenerMessage() {
+    this.webSocketService.getMessageSubject().subscribe((game: any) => {
+      //   this.messageList = messages.map((item: any) => ({
+      //     ...item,
+      //     message_side: item.user === this.userId ? 'sender' : 'reciver',
+      //   }));
+      console.log('game listened: ', game);
+    });
+    // console.log(this.messageList);
   }
 }

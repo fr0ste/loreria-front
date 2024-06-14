@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Client, Message } from '@stomp/stompjs';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import SockJS from 'sockjs-client';
+import { Game } from '../models/games';
+import { ConnectRequest } from './models/connect.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +12,9 @@ import SockJS from 'sockjs-client';
 export class WebSocketService {
   private stompClient: Client;
   private gameStateSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private baseUrl = 'http://localhost:3000/game';
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.stompClient = new Client({
       webSocketFactory: () => new SockJS('http://localhost:3000/loteria'),
       reconnectDelay: 5000,
@@ -47,4 +51,29 @@ export class WebSocketService {
       this.stompClient.deactivate();
     }
   }
+
+  startGame(maxPlayers: number): Observable<Game> {
+    return this.http.post<Game>(`${this.baseUrl}/start`, { maxPlayers });
+  }
+
+  connectToGame(connectRequest: ConnectRequest): Observable<Game> {
+    return this.http.post<Game>(`${this.baseUrl}/connect`, connectRequest);
+  }
+
+  popCard(gameId: string): Observable<Game> {
+    return this.http.post<Game>(`${this.baseUrl}/pop-card/${gameId}`, {});
+  }
+
+  getGames(): Observable<Game[]> {
+    return this.http.get<Game[]>(`${this.baseUrl}/games`);
+  }
+
+  getGame(gameId: string): Observable<Game> {
+    return this.http.get<Game>(`${this.baseUrl}/${gameId}`);
+  }
+
+  getMessageSubject() {
+    return this.gameStateSubject.asObservable();
+  }
+
 }

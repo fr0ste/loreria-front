@@ -1,165 +1,59 @@
 export interface Games{
-    "gameId": number,
-    "players": Players,
-    "status": string,
-    "deck": Cards,
-    "maxPlayer": number,
-    "currentCard": CurrentCard,
-    "player": any
+    gameId: number,
+    players: Players,
+    status: string,
+    deck: Cards,
+    maxPlayer: number,
+    currentCard: CurrentCard,
+    player: any
     
 }
 
 export interface Players{
-    "playerId": string,
-    "username": string,
-    "table": any,
-    "winner": boolean
+    playerId: string,
+    username: string,
+    table: any,
+    winner: boolean
 }
 
 export interface Cards{
-    "idCard": number,
-    "image": string,
-    "phrase": string,
-    "name": string,
-    "number": number,
-    "state": boolean
+    idCard: number,
+    image: string,
+    phrase: string,
+    name: string,
+    number: number,
+    state: boolean,
+    left?: string;
+    zIndex?: number;
+    transform?: string;
 }
 
 export interface CurrentCard{
-    "idCard": number,
-    "image": string,
-    "phrase": string,
-    "name": string,
-    "number": number,
-    "state": boolean
+    idCard: number,
+    image: string,
+    phrase: string,
+    name: string,
+    number: number,
+    state: boolean
 
 }
 
 export interface Player{
-    "playerId": string,
-    "username": string,
-    "winner": boolean
+    playerId: string,
+    username: string,
+    winner: boolean
+  }
+
+  export interface Deck {
+    cards: Cards[];
   }
 
 
-
-
-[
-    {
-      "gameId": "string",
-      "players": [
-        {
-          "playerId": "string",
-          "username": "string",
-          "table": {
-            "table": {
-              "additionalProp1": {
-                "idCard": 0,
-                "image": "string",
-                "phrase": "string",
-                "name": "string",
-                "number": 0,
-                "state": true
-              },
-              "additionalProp2": {
-                "idCard": 0,
-                "image": "string",
-                "phrase": "string",
-                "name": "string",
-                "number": 0,
-                "state": true
-              },
-              "additionalProp3": {
-                "idCard": 0,
-                "image": "string",
-                "phrase": "string",
-                "name": "string",
-                "number": 0,
-                "state": true
-              }
-            },
-            "upTable": {
-              "cards": [
-                {
-                  "idCard": 0,
-                  "image": "string",
-                  "phrase": "string",
-                  "name": "string",
-                  "number": 0,
-                  "state": true
-                }
-              ]
-            }
-          },
-          "winner": true
-        }
-      ],
-      "status": "NEW",
-      "deck": {
-        "cards": [
-          {
-            "idCard": 0,
-            "image": "string",
-            "phrase": "string",
-            "name": "string",
-            "number": 0,
-            "state": true
-          }
-        ]
-      },
-      "maxPlayer": 0,
-      "currentCard": {
-        "idCard": 0,
-        "image": "string",
-        "phrase": "string",
-        "name": "string",
-        "number": 0,
-        "state": true
-      },
-      "player": {
-        "playerId": "string",
-        "username": "string",
-        "table": {
-          "table": {
-            "additionalProp1": {
-              "idCard": 0,
-              "image": "string",
-              "phrase": "string",
-              "name": "string",
-              "number": 0,
-              "state": true
-            },
-            "additionalProp2": {
-              "idCard": 0,
-              "image": "string",
-              "phrase": "string",
-              "name": "string",
-              "number": 0,
-              "state": true
-            },
-            "additionalProp3": {
-              "idCard": 0,
-              "image": "string",
-              "phrase": "string",
-              "name": "string",
-              "number": 0,
-              "state": true
-            }
-          },
-          "upTable": {
-            "cards": [
-              {
-                "idCard": 0,
-                "image": "string",
-                "phrase": "string",
-                "name": "string",
-                "number": 0,
-                "state": true
-              }
-            ]
-          }
-        },
-        "winner": true
-      }
-    }
-  ]
+  export interface Game {
+    gameId: string;
+    players?: any[];
+    maxPlayers: number;
+    status: string;
+    currentCard?: any; // Ajusta según la estructura real de la carta
+    deck: Deck;
+  }
