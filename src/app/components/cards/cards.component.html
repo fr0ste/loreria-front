@@ -1,24 +1,30 @@
-<div class="container">
-  <ul class="card-block">
-    <li
-      *ngFor="let card of game.deck.cards; let i = index"
-      [ngClass]="{ drop: droppedCard === i }"
-      [ngStyle]="{
-        left: card.left,
-        'z-index': card.zIndex,
-        transform: card.transform
-      }"
-    >
-      <h1>{{ card.phrase }}</h1>
-      <img [src]="'assets/images/' + card.image + '.jpg'" alt="Imagen" />
-      <button
-        type="button"
-        class="next-card next"
-        (click)="nextCardLoteria(i)"
-        [disabled]="i !== currentIndex"
+@if (gameStatus != "IN_PROGRESS") {
+  <app-waiting></app-waiting>
+}
+
+@if (gameStatus == "IN_PROGRESS") {
+  <div class="container">
+    <ul class="card-block">
+      <li
+        *ngFor="let card of game.deck.cards; let i = index"
+        [ngClass]="{ drop: droppedCard === i }"
+        [ngStyle]="{
+          left: card.left,
+          'z-index': card.zIndex,
+          transform: card.transform
+        }"
       >
-        Siguiente >>
-      </button>
-    </li>
-  </ul>
-</div>
+        <h1>{{ card.phrase }}</h1>
+        <img [src]="'assets/images/' + card.image + '.jpg'" alt="Imagen" />
+        <button
+          type="button"
+          class="next-card next"
+          (click)="nextCardLoteria(i)"
+          [disabled]="i !== currentIndex"
+        >
+          Siguiente >>
+        </button>
+      </li>
+    </ul>
+  </div>
+}

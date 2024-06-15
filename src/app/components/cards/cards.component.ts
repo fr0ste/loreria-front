@@ -3,15 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WebSocketService } from '../../services/web-socket.service';
 import { Game } from '../../models/games';
+import { WaitingComponent } from '../waiting/waiting.component';
 
 @Component({
   selector: 'app-cards',
   standalone: true,
-  imports: [NgFor, NgIf, CommonModule],
+  imports: [NgFor, NgIf, CommonModule, WaitingComponent],
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.css',
 })
 export class CardsComponent implements OnInit {
+
   droppedCard: number | null = null;
 
   currentIndex = 0;
@@ -20,6 +22,8 @@ export class CardsComponent implements OnInit {
 
   game!: Game;
 
+  gameStatus: any;
+
   constructor(
     private route: ActivatedRoute,
     private webSocketService: WebSocketService
@@ -27,6 +31,7 @@ export class CardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameId = this.route.snapshot.paramMap.get('id');
+    this.listenerMessage();
 
     this.webSocketService.getGame(this.gameId || '').subscribe((game: Game) => {
       this.game = game;
@@ -66,12 +71,9 @@ export class CardsComponent implements OnInit {
 
   public listenerMessage() {
     this.webSocketService.getMessageSubject().subscribe((game: any) => {
-      //   this.messageList = messages.map((item: any) => ({
-      //     ...item,
-      //     message_side: item.user === this.userId ? 'sender' : 'reciver',
-      //   }));
       console.log('game listened: ', game);
+      this.gameStatus = game.status
+      console.log('gamestatus ', this.gameStatus);
     });
-    // console.log(this.messageList);
   }
 }

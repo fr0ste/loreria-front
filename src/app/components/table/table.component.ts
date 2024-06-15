@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { NgFor } from '@angular/common';
+import { WebSocketService } from '../../services/web-socket.service';
 
 @Component({
   selector: 'app-table',
@@ -19,7 +20,7 @@ export class TableComponent implements OnInit {
   gamesData!: Games;
   deckPlayer: Cards[] = [];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private webSocketService: WebSocketService) {}
 
   ngOnInit(): void {
     this.gameId = this.route.snapshot.params['game'];
@@ -68,5 +69,13 @@ export class TableComponent implements OnInit {
 
   marcaCasilla(idCard: number) {
     console.log('Marca casilla:', idCard);
+  }
+  
+
+  public listenerMessage() {
+    this.webSocketService.getMessageSubject().subscribe((game: any) => {
+      console.log('game listened: ', game);
+    });
+    
   }
 }
