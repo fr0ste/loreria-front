@@ -1,6 +1,6 @@
 export interface Games{
     gameId: number,
-    players: Players,
+    players: Players[],
     status: string,
     deck: Cards,
     maxPlayer: number,
