@@ -70,9 +70,9 @@ export class CardsComponent implements OnInit, OnDestroy {
     let len = this.game.deck.cards.length;
     let left = -10;
     let s = 10;
-    for (let i = len - 1; i >= 0; i--) {
+    for (let i = 0; i <= len - 1; i++) {
       this.game.deck.cards[i].left = (left += 0) + 'px';
-      this.game.deck.cards[i].zIndex = len - i;
+      this.game.deck.cards[i].zIndex = len + i;
     }
   }
 

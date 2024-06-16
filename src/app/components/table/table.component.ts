@@ -72,6 +72,9 @@ export class TableComponent implements OnInit {
         if (this.username === player.username) {
           this.deckPlayer = Object.values(player.table.table); // Transformar objeto en array
           console.log('Deck:', this.deckPlayer);
+          if(player.winning){
+            this.gameStatus = "WINNING";
+          }
           return;
         }
       }
@@ -90,6 +93,7 @@ export class TableComponent implements OnInit {
     this.gameSubscription = this.webSocketService.getGameState().subscribe((game: Game) => {
       if(game != null){
         this.gameStatus = game.status;
+        this.getGame();
       }
 
       console.log("status", this.gameStatus)

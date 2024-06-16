@@ -5,7 +5,11 @@
       <div class="card">
         
         @for (item of deckPlayer; track $index) {
-          <img [src]="'../../../assets/images/' + item.image + '.jpg'" />
+          @if (item.state) {
+            <img [src]="'../../../assets/images/' + item.image + '.jpg'" />
+          }@else{
+            <img [src]="'../../../assets/images/frijol.jpg'" />
+          }
       }
     </div>
     </div>

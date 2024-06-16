@@ -1,17 +1,25 @@
 <div class="container mt-5">
-    <div class="card">
-      <div class="card-header">
-        <h2>Crear un nuevo juego</h2>
-      </div>
-      <div class="card-body">
-        <form (ngSubmit)="createGame()">
-          <div class="form-group">
-            <label for="maxPlayers">Número máximo de jugadores:</label>
-            <input type="number" id="maxPlayers" class="form-control" [(ngModel)]="maxPlayers" name="maxPlayers" min="2" max="10" required>
-          </div>
-          <button type="submit" class="btn btn-primary mt-3">Crear juego</button>
-        </form>
-      </div>
+  <div class="card">
+    <div class="card-header">
+      <h2>Crear un nuevo juego</h2>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="createGame()">
+        <div class="form-group">
+          <label for="maxPlayers">Número máximo de jugadores:</label>
+          <input
+            type="number"
+            id="maxPlayers"
+            class="form-control"
+            [(ngModel)]="maxPlayers"
+            name="maxPlayers"
+            min="2"
+            max="10"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Crear juego</button>
+      </form>
     </div>
   </div>
-      
+</div>
