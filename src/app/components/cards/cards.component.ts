@@ -1,8 +1,9 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WebSocketService } from '../../services/web-socket.service';
 import { Game } from '../../models/games';
+import { Subscription } from 'rxjs';
 import { WaitingComponent } from '../waiting/waiting.component';
 
 @Component({
@@ -12,17 +13,13 @@ import { WaitingComponent } from '../waiting/waiting.component';
   templateUrl: './cards.component.html',
   styleUrl: './cards.component.css',
 })
-export class CardsComponent implements OnInit {
-
-  droppedCard: number | null = null;
-
-  currentIndex = 0;
-
-  public gameId!: string | null;
-
+export class CardsComponent implements OnInit, OnDestroy {
+  gameId!: string;
   game!: Game;
-
-  gameStatus: any;
+  private gameSubscription!: Subscription;
+  droppedCard: number | null = null;
+  currentIndex = 0;
+  gameStatus: string = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -30,17 +27,43 @@ export class CardsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.gameId = this.route.snapshot.paramMap.get('id');
-    this.listenerMessage();
+    this.gameId = this.route.snapshot.paramMap.get('id') || '';
 
-    this.webSocketService.getGame(this.gameId || '').subscribe((game: Game) => {
-      this.game = game;
-      console.log('Game state:', game);
-      this.webSocketService.joinGame(this.gameId || '');
-      this.initializeCards();
-      this.listenerMessage();
-    });
+    this.webSocketService.joinGame(this.gameId).then(() => {
+      this.webSocketService.getGame(this.gameId).subscribe((game: Game) => {
+        this.game = game;
+        this.gameStatus =game.status;
+        console.log('Initial game state:', game);
+        this.initializeCards();
+        this.listenerMessage();
+      });
     
+    }).catch((error) => {
+      console.error('Failed to join game:', error);
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.gameSubscription) {
+      this.gameSubscription.unsubscribe();
+    }
+    this.webSocketService.disconnect();
+  }
+
+  listenerMessage() {
+    this.gameSubscription = this.webSocketService.getGameState().subscribe((game: Game) => {
+      if(game != null){
+        this.gameStatus = game.status;
+      }
+
+      console.log("status", this.gameStatus)
+    });
+  }
+
+  popCard() {
+    this.webSocketService.popCard(this.gameId).subscribe((game) => {
+      console.log('Card popped:', game);
+    });
   }
 
   initializeCards() {
@@ -54,6 +77,7 @@ export class CardsComponent implements OnInit {
   }
 
   nextCardLoteria(index: number) {
+    console.log('on next', this.game);
     this.popCard();
     this.droppedCard = index;
     setTimeout(() => {
@@ -61,19 +85,5 @@ export class CardsComponent implements OnInit {
       this.droppedCard = null;
       this.initializeCards();
     }, 500);
-  }
-
-  popCard() {
-    this.webSocketService.popCard(this.gameId || '').subscribe((game) => {
-      console.log('Card popped:', game);
-    });
-  }
-
-  public listenerMessage() {
-    this.webSocketService.getMessageSubject().subscribe((game: any) => {
-      console.log('game listened: ', game);
-      this.gameStatus = game.status
-      console.log('gamestatus ', this.gameStatus);
-    });
   }
 }

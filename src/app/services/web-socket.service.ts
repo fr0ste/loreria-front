@@ -22,17 +22,26 @@ export class WebSocketService {
     });
   }
 
-  joinGame(gameId: string) {
-    this.stompClient.onConnect = (frame) => {
-      console.log('Connected: ' + frame);
-      this.stompClient.subscribe(`/topic/game-progress/${gameId}`, (message: Message) => {
-        const gameState = JSON.parse(message.body);
-        this.gameStateSubject.next(gameState);
-        console.log(gameState);
-      });
-    };
+  joinGame(gameId: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.stompClient.onConnect = (frame) => {
+        console.log('Connected: ' + frame);
+        this.stompClient.subscribe(`/topic/game-progress/${gameId}`, (message: Message) => {
+          const gameState = JSON.parse(message.body);
+          this.gameStateSubject.next(gameState);
+          console.log(gameState);
+        });
+        resolve();
+      };
 
-    this.stompClient.activate();
+      this.stompClient.onStompError = (frame) => {
+        console.error('Broker reported error: ' + frame.headers['message']);
+        console.error('Additional details: ' + frame.body);
+        reject(frame);
+      };
+
+      this.stompClient.activate();
+    });
   }
 
   sendGamePlay(gameId: string, gamePlay: any) {
@@ -75,5 +84,4 @@ export class WebSocketService {
   getMessageSubject() {
     return this.gameStateSubject.asObservable();
   }
-
 }

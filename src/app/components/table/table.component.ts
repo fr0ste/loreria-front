@@ -5,11 +5,13 @@ import { ApiService } from '../../services/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { NgFor } from '@angular/common';
 import { WebSocketService } from '../../services/web-socket.service';
+import { WaitingComponent } from '../waiting/waiting.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, WaitingComponent],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
 })
@@ -17,17 +19,29 @@ export class TableComponent implements OnInit {
   private apiService = inject(ApiService<{}>);
   gameId: string = '';
   username: string = '';
-  gamesData!: Games;
+  gamesData!: Game;
   deckPlayer: Cards[] = [];
+  private gameSubscription!: Subscription;
 
   constructor(private route: ActivatedRoute, private webSocketService: WebSocketService) {}
+
+  gameStatus!: String;
 
   ngOnInit(): void {
     this.gameId = this.route.snapshot.params['game'];
     this.username = this.route.snapshot.params['player'];
-    console.log('Game ID:', this.gameId);
-    console.log('Username:', this.username);
-    this.getGame();
+
+    this.webSocketService.joinGame(this.gameId).then(() => {
+      this.webSocketService.getGame(this.gameId).subscribe((game: Game) => {
+        this.getGame();
+        this.gameStatus =game.status;
+        console.log('Initial game state:', game);
+        this.listenerMessage();
+      });
+    
+    }).catch((error) => {
+      console.error('Failed to join game:', error);
+    });
   }
 
   getGame() {
@@ -72,10 +86,13 @@ export class TableComponent implements OnInit {
   }
   
 
-  public listenerMessage() {
-    this.webSocketService.getMessageSubject().subscribe((game: any) => {
-      console.log('game listened: ', game);
+  listenerMessage() {
+    this.gameSubscription = this.webSocketService.getGameState().subscribe((game: Game) => {
+      if(game != null){
+        this.gameStatus = game.status;
+      }
+
+      console.log("status", this.gameStatus)
     });
-    
   }
 }

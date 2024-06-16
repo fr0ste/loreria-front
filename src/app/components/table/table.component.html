@@ -1,10 +1,17 @@
-<div class="main_container">
-  <div class="card_container" id="carta_1">
-    <div class="card">
-      
-      @for (item of deckPlayer; track $index) {
-        <img [src]="'../../../assets/images/' + item.image + '.jpg'" />
-    }
+
+@if (gameStatus == "IN_PROGRESS") {
+  <div class="main_container">
+    <div class="card_container" id="carta_1">
+      <div class="card">
+        
+        @for (item of deckPlayer; track $index) {
+          <img [src]="'../../../assets/images/' + item.image + '.jpg'" />
+      }
+    </div>
+    </div>
   </div>
-  </div>
-</div>
+}
+
+@if (gameStatus == "WAITING_FOR_PLAYERS") {
+  <app-waiting></app-waiting>
+}
