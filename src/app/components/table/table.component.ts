@@ -7,6 +7,14 @@ import { NgFor } from '@angular/common';
 import { WebSocketService } from '../../services/web-socket.service';
 import { WaitingComponent } from '../waiting/waiting.component';
 import { Subscription } from 'rxjs';
+import { WinnerComponentComponent } from '../winner-component/winner-component.component';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-table',
@@ -23,11 +31,17 @@ export class TableComponent implements OnInit {
   deckPlayer: Cards[] = [];
   private gameSubscription!: Subscription;
 
-  constructor(private route: ActivatedRoute, private webSocketService: WebSocketService) {}
+  constructor(private route: ActivatedRoute, private webSocketService: WebSocketService, public dialog: MatDialog) {}
 
   gameStatus!: String;
 
+  openDialog() {
+    this.dialog.open(WinnerComponentComponent, {
+    });
+  }
+
   ngOnInit(): void {
+    this.openDialog();
     this.gameId = this.route.snapshot.params['game'];
     this.username = this.route.snapshot.params['player'];
 
@@ -74,6 +88,7 @@ export class TableComponent implements OnInit {
           console.log('Deck:', this.deckPlayer);
           if(player.winning){
             this.gameStatus = "WINNING";
+            
           }
           return;
         }
@@ -87,8 +102,8 @@ export class TableComponent implements OnInit {
   marcaCasilla(idCard: number) {
     console.log('Marca casilla:', idCard);
   }
-  
 
+  
   listenerMessage() {
     this.gameSubscription = this.webSocketService.getGameState().subscribe((game: Game) => {
       if(game != null){
