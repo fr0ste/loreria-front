@@ -20,7 +20,7 @@ import { ConnectRequest } from '../../services/models/connect.model';
   })
   export class LobbyPlayerComponent implements OnInit {
     games: Games[] = [];
-    url = "http://localhost:3000";
+    url = "http://132.18.53.92:3000";
     private apiService = inject(ApiService<{}>);
     private webSocketService = inject(WebSocketService)
     
