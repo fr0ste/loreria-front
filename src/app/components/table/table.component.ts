@@ -64,7 +64,7 @@ export class TableComponent implements OnInit {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),
-        url: 'http://localhost:3000/game/' + this.gameId,
+        url: 'http://132.18.53.92:3000/game/' + this.gameId,
         data: {},
       })
       .subscribe({

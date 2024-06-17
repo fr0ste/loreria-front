@@ -12,11 +12,11 @@ import { ConnectRequest } from './models/connect.model';
 export class WebSocketService {
   private stompClient: Client;
   private gameStateSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  private baseUrl = 'http://localhost:3000/game';
+  private baseUrl = 'http://132.18.53.92:3000/game';
 
   constructor(private http: HttpClient) {
     this.stompClient = new Client({
-      webSocketFactory: () => new SockJS('http://localhost:3000/loteria'),
+      webSocketFactory: () => new SockJS('http://132.18.53.92:3000/loteria'),
       reconnectDelay: 5000,
       debug: (str) => console.log(str),
     });
