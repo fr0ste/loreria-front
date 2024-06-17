@@ -1,29 +1,60 @@
 form {
-  width: 350px;
-  height: 500px;
-  position: relative;
-  margin: 10px; /* Espacio entre los formularios */
+  width: 100%;
+  max-width: 400px;
+  max-height: 1000px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .form-background {
   background-image: url('../img/form.jpg');
-  background-size: cover; /* Ajusta la imagen al tamaño del formulario */
-  background-position: center; /* Centra la imagen en el formulario */
-  padding: 100px; /* Opcional: Añade un poco de padding */
+  background-size: cover;
+  background-position: center;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-input {
-  margin-top: 100px;
-  margin-right: 0px; /* Ajusta este valor según sea necesario */
-}
 .game-id-container {
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-radius: 5px;
   display: inline-block;
+  margin-bottom: 20px;
 }
 
 .game-id {
   color: white;
-  margin: 0; /* Asegúrate de que no haya margen alrededor del texto */
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 300px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
 }

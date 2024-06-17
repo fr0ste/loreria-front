@@ -1,15 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
-#bg {
-  background-image: url('../img/fondo.jpg');
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  filter: blur(5px);
-  z-index: -1; /* Coloca el fondo detrás del contenido */
-}
+
 
 #content {
   position: relative; /* Asegura que los componentes card-server se posicionen relativos a este contenedor */
