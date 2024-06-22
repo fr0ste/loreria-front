@@ -6,6 +6,7 @@ import { LoteriaComponent } from './components/loteria/loteria.component';
 import { WaitingComponent } from './components/waiting/waiting.component';
 import { LobbyPlayerComponent } from './components/lobby-player/lobby-player.component';
 import { CantadorStartComponent } from './components/cantador-start/cantador-start.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 export const routes: Routes = [
@@ -20,6 +21,10 @@ export const routes: Routes = [
   {
     path: 'lobby',
     component: LobbyPlayerComponent
+  },
+   {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'cards/:id',
