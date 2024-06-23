@@ -18,3 +18,9 @@
 .card-header {
   font-size: 40px !important;
 }
+
+/* app.component.css (o styles.css si es global) */
+.alert-danger .error-message {
+  font-size: 0.9rem;
+  /* Tamaño de fuente más pequeño para los mensajes de error */
+}

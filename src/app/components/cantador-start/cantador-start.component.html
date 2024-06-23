@@ -1,24 +1,33 @@
+<!-- app.component.html -->
 <div class="container mt-5">
   <div class="card">
     <div class="card-header">
       <h2>Crear un nuevo juego</h2>
     </div>
     <div class="card-body">
-      <form (ngSubmit)="createGame()">
+      <form (ngSubmit)="createGame(gameForm)" #gameForm="ngForm">
         <div class="form-group">
           <label for="maxPlayers">Número máximo de jugadores:</label>
-          <input
-            type="number"
-            id="maxPlayers"
-            class="form-control"
-            [(ngModel)]="maxPlayers"
-            name="maxPlayers"
-            min="2"
-            max="10"
-            required
-          />
+          <input type="number" id="maxPlayers" class="form-control" [(ngModel)]="maxPlayers" name="maxPlayers" min="2"
+            max="10" required #maxPlayersInput="ngModel" />
+
+          <!-- Mostrar mensaje de error si el campo es inválido -->
+          <div *ngIf="maxPlayersInput.invalid && (maxPlayersInput.dirty || maxPlayersInput.touched)"
+            class="alert alert-danger" role="alert">
+            <div *ngIf="maxPlayersInput.errors?.['required']" class="error-message">
+              Necesitas ingresar el número de jugadores.
+            </div>
+            <div *ngIf="maxPlayersInput.errors?.['min']" class="error-message">
+              El número mínimo de jugadores es 2.
+            </div>
+            <div *ngIf="maxPlayersInput.errors?.['max']" class="error-message">
+              El número máximo de jugadores es 10.
+            </div>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Crear juego</button>
+        <button type="button" class="btn btn-primary btn-success" [disabled]="gameForm.invalid">Crear juego</button>
+
+
       </form>
     </div>
   </div>
