@@ -1,9 +1,8 @@
 <div class="card-container">
-    <form (ngSubmit)="onSubmit()" class="form-background">
-      <div class="buttons-container">
-        <button type="submit" class="form-button">Unirse a un servidor</button>
-        <button type="submit" class="form-button">Crear servidor</button>
-      </div>
-    </form>
-  </div>
-  
+  <form class="form-background">
+    <div class="buttons-container">
+      <button type="button" class="form-button" (click)="navigateToLobby()">Unirse a un servidor</button>
+      <button type="button" class="form-button" (click)="navigateToCantadorStart()">Crear servidor</button>
+    </div>
+  </form>
+</div>

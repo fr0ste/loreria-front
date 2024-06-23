@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
 
-  onSubmit() {
-    // Emite un objeto con ambos parámetros
-   
+  constructor(private router: Router) {}
+
+  navigateToLobby() {
+    this.router.navigate(['/lobby']);
+  }
+
+  navigateToCantadorStart() {
+    this.router.navigate(['/cantador-start']);
   }
 }
