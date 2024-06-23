@@ -3,6 +3,7 @@ import { CompatClient, Stomp } from '@stomp/stompjs';
 import { BehaviorSubject } from 'rxjs';
 import SockJS from 'sockjs-client';
 import { ChatMessage } from './../models/chat-message';
+import { UriConstants } from '../utils/uris.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class ChatService {
   }
 
   initConnectionSocket() {
-    const url = 'http://132.18.53.92:3000/chat';
+    const url = UriConstants.BACK_HOST + '/chat';
     const socket = new SockJS(url);
     this.stompClient = Stomp.over(socket);
   }

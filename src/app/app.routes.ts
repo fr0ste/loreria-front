@@ -31,7 +31,7 @@ export const routes: Routes = [
     component: CardsComponent
   },{ 
     path: '',
-    component: LoteriaComponent
+    component: LoginComponent
   },
   {
     path: 'waiting',

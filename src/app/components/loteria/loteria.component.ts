@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { PlayerFormComponent } from '../player-form/player-form.component';
 import { GameBoardComponent } from '../game-board/game-board.component';
+import { UriConstants } from '../../utils/uris.constants';
 
 @Component({
   selector: 'app-loteria',
@@ -23,7 +24,7 @@ export class LoteriaComponent {
     this.playerName = playerName;
 
     // Llamada al backend para crear o unirse a un juego y obtener gameId
-    this.http.post<any>('http://localhost:3000/game/start', { name: playerName }).subscribe(response => {
+    this.http.post<any>(UriConstants.BACK_HOST+'/game/start', { name: playerName }).subscribe(response => {
       this.gameId = response.gameId;
     });
   }

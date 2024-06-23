@@ -1,20 +1,17 @@
-import { Cards, Game, Games } from './../../models/games';
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../services/api.service';
-import { HttpHeaders } from '@angular/common/http';
 import { NgFor } from '@angular/common';
+import { HttpHeaders } from '@angular/common/http';
+import { Component, OnInit, inject } from '@angular/core';
+import {
+  MatDialog
+} from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ApiService } from '../../services/api.service';
 import { WebSocketService } from '../../services/web-socket.service';
 import { WaitingComponent } from '../waiting/waiting.component';
-import { Subscription } from 'rxjs';
 import { WinnerComponentComponent } from '../winner-component/winner-component.component';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogTitle,
-  MatDialogContent,
-} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { Cards, Game } from './../../models/games';
+import { UriConstants } from '../../utils/uris.constants';
 
 @Component({
   selector: 'app-table',
@@ -64,7 +61,7 @@ export class TableComponent implements OnInit {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),
-        url: 'http://132.18.53.92:3000/game/' + this.gameId,
+        url: UriConstants.BACK_HOST +'/game/' + this.gameId,
         data: {},
       })
       .subscribe({

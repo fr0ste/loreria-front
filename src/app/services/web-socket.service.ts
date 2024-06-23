@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import SockJS from 'sockjs-client';
 import { Game } from '../models/games';
 import { ConnectRequest } from './models/connect.model';
+import { UriConstants } from '../utils/uris.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +13,11 @@ import { ConnectRequest } from './models/connect.model';
 export class WebSocketService {
   private stompClient: Client;
   private gameStateSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  private baseUrl = 'http://132.18.53.92:3000/game';
+  private baseUrl = UriConstants.BACK_HOST;
 
   constructor(private http: HttpClient) {
     this.stompClient = new Client({
-      webSocketFactory: () => new SockJS('http://132.18.53.92:3000/loteria'),
+      webSocketFactory: () => new SockJS(UriConstants.BACK_HOST + '/loteria'),
       reconnectDelay: 5000,
       debug: (str) => console.log(str),
     });

@@ -8,6 +8,7 @@
   import { CommonModule } from '@angular/common'; // Importa CommonModule
   import { Router } from '@angular/router';
 import { ConnectRequest } from '../../services/models/connect.model';
+import { UriConstants } from '../../utils/uris.constants';
 
 
 
@@ -20,7 +21,7 @@ import { ConnectRequest } from '../../services/models/connect.model';
   })
   export class LobbyPlayerComponent implements OnInit {
     games: Games[] = [];
-    url = "http://132.18.53.92:3000";
+    url = UriConstants.BACK_HOST;
     private apiService = inject(ApiService<{}>);
     private webSocketService = inject(WebSocketService)
     
