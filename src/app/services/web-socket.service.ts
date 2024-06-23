@@ -13,7 +13,7 @@ import { UriConstants } from '../utils/uris.constants';
 export class WebSocketService {
   private stompClient: Client;
   private gameStateSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  private baseUrl = UriConstants.BACK_HOST;
+  private baseUrl = UriConstants.BACK_HOST+'/game';
 
   constructor(private http: HttpClient) {
     this.stompClient = new Client({
