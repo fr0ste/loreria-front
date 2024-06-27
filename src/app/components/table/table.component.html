@@ -14,13 +14,14 @@
     </div>
     </div>
 
-    <div class="deck_container">
+    <div class="deck-container">
       <ul class="card-block">
-        <li
-          *ngFor="let card of gamesData.deck.cards; let i = index"
-        >
-          <h1>{{ card.phrase }}</h1>
-          <img [src]="'assets/images/' + card.image + '.jpg'" alt="Imagen" />
+        <li class="deck-card">
+          <h3>Carta actual: </h3>
+          <div class="card-content">
+            <h3>{{ gamesData.deck.cards[gamesData.deck.cards.length-1].phrase }}</h3>
+            <img [src]="'assets/images/' + gamesData.deck.cards[gamesData.deck.cards.length-1].image + '.jpg'" alt="Imagen" class="deck-image"/>
+          </div>
         </li>
       </ul>
     </div>
