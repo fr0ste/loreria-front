@@ -24,6 +24,7 @@ export class TableComponent implements OnInit {
   username: string = '';
   gamesData!: Game;
   deckPlayer: Cards[] = [];
+  amWinner: boolean = false;
   private gameSubscription!: Subscription;
 
   constructor(
@@ -131,7 +132,7 @@ export class TableComponent implements OnInit {
         next: (response) => {
           this.getGame();
           console.log(response);
-         
+          
         },
         error: (error) => {
           console.error('Detalles del error:', error.message);
@@ -149,6 +150,7 @@ export class TableComponent implements OnInit {
         if (game != null) {
           this.gameStatus = game.status;
           this.getGame();
+          this.checkWinner();
         }
 
         console.log('status', this.gameStatus);
@@ -161,5 +163,21 @@ export class TableComponent implements OnInit {
     cardId: number
   ): Observable<any> {
     return this.webSocketService.updateCardState(gameId,playerId,cardId);
+  }
+
+  checkWinner(){
+    const players = this.gamesData.players;
+    if (Array.isArray(players)) {
+      for (const player of players) {
+        if (this.username === player.username) {
+          if(player.winner){
+            this.amWinner = true;
+          }
+        }
+      }
+      console.log('Username no encontrado:', this.username);
+    } else {
+      console.log('Players no es un array:', players);
+    }
   }
 }

@@ -37,5 +37,11 @@
 
 
 @if(gameStatus == "FINISHED"){
-  <app-winner-component></app-winner-component>
+
+  @if(amWinner){
+    <app-winner-component></app-winner-component>
+  }@else {
+    <h2>Ya hay un ganador</h2>
+  }
+  
 }
