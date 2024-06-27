@@ -5,6 +5,7 @@ import { LobbyPlayerComponent } from './components/lobby-player/lobby-player.com
 import { LoginComponent } from './components/login/login.component';
 import { TableComponent } from './components/table/table.component';
 import { WaitingComponent } from './components/waiting/waiting.component';
+import { WinnerComponentComponent } from './components/winner-component/winner-component.component';
 
 
 export const routes: Routes = [
@@ -34,5 +35,9 @@ export const routes: Routes = [
   {
     path: 'cantador-start',
     component: CantadorStartComponent
+  },
+  {
+    path: 'winner',
+    component: WinnerComponentComponent
   }
 ];
