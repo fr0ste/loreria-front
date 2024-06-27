@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import confetti from 'canvas-confetti';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-winner-component',
@@ -8,6 +10,12 @@ import confetti from 'canvas-confetti';
   styleUrls: ['./winner-component.component.css'],
 })
 export class WinnerComponentComponent implements OnInit {
+  constructor(private router: Router) {}
+
+
+  navigateToLobby() {
+    this.router.navigate(['/login']);
+  }
 
   @Input() gameId: number = 0; // Asegúrate de tener esta entrada para gameId
   playerName: string = '';

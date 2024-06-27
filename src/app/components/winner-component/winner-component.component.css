@@ -54,6 +54,7 @@ html, body {
   flex: 1;
   margin: 0 5px; /* Espacio entre los botones */
   max-width: 45%; /* Limita el tamaño máximo de cada botón */
+  margin-left: 70px;
 }
 
 .form-button:hover {
