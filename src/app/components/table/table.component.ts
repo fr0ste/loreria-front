@@ -3,7 +3,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { WebSocketService } from '../../services/web-socket.service';
 import { WaitingComponent } from '../waiting/waiting.component';
@@ -14,11 +14,7 @@ import { UriConstants } from '../../utils/uris.constants';
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [
-    NgFor,
-    WaitingComponent,
-    WinnerComponentComponent
-  ],
+  imports: [NgFor, WaitingComponent, WinnerComponentComponent],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
 })
@@ -99,8 +95,41 @@ export class TableComponent implements OnInit {
     }
   }
 
-  public marcaCasilla(idCard: number) {
-    console.log('Marca casilla:', idCard);
+  marcaCasilla(idCard: number) {
+    const currentCard = this.gamesData.deck.cards[this.gamesData.deck.cards.length - 1];
+    const clickedCard = this.deckPlayer[idCard];
+    console.log('Current deck card:', currentCard);
+    console.log('Clicked card:', clickedCard);
+    console.log('Deck Player:', this.deckPlayer);
+    console.log('Deck Cards:', this.gamesData.deck.cards);
+    
+    if (clickedCard && clickedCard.idCard === currentCard.idCard) {
+      this.apiService
+      .postService({
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+        url: UriConstants.BACK_HOST + '/game/updateCardState',
+        data: {
+          playerId: this.username,
+          gameId: this.gameId,
+          cardId: currentCard.idCard,
+
+        },
+      })
+      .subscribe({
+        next: (response) => {
+          this.getGame();
+          console.log(response);
+         
+        },
+        error: (error) => {
+          console.error('Detalles del error:', error.message);
+        },
+      });
+    } else {
+      console.log('Selected card does not match the current deck card');
+    }
   }
 
   listenerMessage() {
@@ -114,5 +143,13 @@ export class TableComponent implements OnInit {
 
         console.log('status', this.gameStatus);
       });
+  }
+
+  updateCardState(
+    gameId: string,
+    playerId: string,
+    cardId: number
+  ): Observable<any> {
+    return this.webSocketService.updateCardState(gameId,playerId,cardId);
   }
 }

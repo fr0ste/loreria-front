@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Client, Message } from '@stomp/stompjs';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -12,8 +12,10 @@ import { UriConstants } from '../utils/uris.constants';
 })
 export class WebSocketService {
   private stompClient: Client;
-  private gameStateSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  private baseUrl = UriConstants.BACK_HOST+'/game';
+  private gameStateSubject: BehaviorSubject<any> = new BehaviorSubject<any>(
+    null
+  );
+  private baseUrl = UriConstants.BACK_HOST + '/game';
 
   constructor(private http: HttpClient) {
     this.stompClient = new Client({
@@ -27,11 +29,14 @@ export class WebSocketService {
     return new Promise((resolve, reject) => {
       this.stompClient.onConnect = (frame) => {
         console.log('Connected: ' + frame);
-        this.stompClient.subscribe(`/topic/game-progress/${gameId}`, (message: Message) => {
-          const gameState = JSON.parse(message.body);
-          this.gameStateSubject.next(gameState);
-          console.log(gameState);
-        });
+        this.stompClient.subscribe(
+          `/topic/game-progress/${gameId}`,
+          (message: Message) => {
+            const gameState = JSON.parse(message.body);
+            this.gameStateSubject.next(gameState);
+            console.log(gameState);
+          }
+        );
         resolve();
       };
 
@@ -85,4 +90,19 @@ export class WebSocketService {
   getMessageSubject() {
     return this.gameStateSubject.asObservable();
   }
+
+  updateCardState(gameId: string, playerId: string, cardId: number): Observable<Game> {
+    const url = `${UriConstants.BACK_HOST}/game/updateCardState`;
+    const body = {
+      gameId: gameId,
+      playerId: playerId,
+      cardId: cardId
+    };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    console.log('Sending updateCardState request with body:', body);
+
+    return this.http.post<Game>(url, body, { headers });
+  }
+
 }
