@@ -1,7 +1,7 @@
 // Importaciones necesarias
 import { Component, Input, OnInit } from '@angular/core'; 
 import confetti from 'canvas-confetti'; 
-import { Router } from '@angular/router'; 
+import { ActivatedRoute, Router } from '@angular/router'; 
 
 // Componente para mostrar al ganador
 // Desarrollado por Getzemani Alejandro Gonzalez Cruz
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./winner-component.component.css'], 
 })
 export class WinnerComponentComponent implements OnInit {
-  constructor(private router: Router) {} // Constructor del componente para inyectar el servicio Router
+  constructor(private router: Router, private route: ActivatedRoute) {} // Constructor del componente para inyectar el servicio Router
 
   /**
    * Navega al lobby (página de inicio de sesión).
@@ -24,12 +24,16 @@ export class WinnerComponentComponent implements OnInit {
   @Input() gameId: number = 0; // Entrada: identificador único del juego (asegúrate de tener esta entrada para gameId)
   playerName: string = ''; // Nombre del jugador
 
+  nameWinner : string = '';
   /**
    * Método del ciclo de vida de Angular que se ejecuta al inicializarse el componente.
    * Lanza el efecto de confeti al cargar el componente.
    */
   ngOnInit(): void {
     this.launchConfetti();
+    this.route.paramMap.subscribe(params => {
+      this.nameWinner = params.get('gameId') || '';
+    });
   }
 
   /**

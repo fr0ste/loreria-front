@@ -2,7 +2,7 @@ import { NgFor } from '@angular/common';
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 import { WebSocketService } from '../../services/web-socket.service';
@@ -27,6 +27,7 @@ export class TableComponent implements OnInit {
   private gameSubscription!: Subscription;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private webSocketService: WebSocketService,
     public dialog: MatDialog
@@ -55,6 +56,8 @@ export class TableComponent implements OnInit {
       });
   }
 
+  winner: boolean = true;
+
   getGame() {
     this.apiService
       .getService({
@@ -76,6 +79,7 @@ export class TableComponent implements OnInit {
       });
   }
 
+  nameWinner : string = '';
   filterUsername() {
     const players = this.gamesData.players;
     if (Array.isArray(players)) {
@@ -83,6 +87,12 @@ export class TableComponent implements OnInit {
         if (this.username === player.username) {
           this.deckPlayer = Object.values(player.table.table); // Transformar objeto en array
           console.log('Deck:', this.deckPlayer);
+        if(this.winner == player.winner){
+          console.log("ganador : ", player.username , " , ", player.winner);
+          this.nameWinner = player.username;
+          this.router.navigate(['/winner', this.nameWinner]); // Redirigir a la ruta con el gameId
+        }
+         
           if (player.winning) {
             this.gameStatus = 'WINNING';
           }
