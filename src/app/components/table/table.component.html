@@ -32,3 +32,8 @@
 @if (gameStatus == "WAITING_FOR_PLAYERS") {
   <app-waiting></app-waiting>
 }
+
+
+@if(gameStatus == "FINISHED"){
+  <app-winner-component></app-winner-component>
+}
