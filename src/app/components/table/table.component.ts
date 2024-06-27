@@ -38,7 +38,6 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.openDialog();
     this.gameId = this.route.snapshot.params['game'];
     this.username = this.route.snapshot.params['player'];
 
@@ -85,6 +84,7 @@ export class TableComponent implements OnInit {
           console.log('Deck:', this.deckPlayer);
           if(player.winning){
             this.gameStatus = "WINNING";
+            this.openDialog();
             
           }
           return;

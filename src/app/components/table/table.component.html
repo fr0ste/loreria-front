@@ -13,13 +13,21 @@
       }
     </div>
     </div>
+
+    <div class="deck_container">
+      <ul class="card-block">
+        <li
+          *ngFor="let card of gamesData.deck.cards; let i = index"
+        >
+          <h1>{{ card.phrase }}</h1>
+          <img [src]="'assets/images/' + card.image + '.jpg'" alt="Imagen" />
+        </li>
+      </ul>
+    </div>
+
   </div>
 }
 
 @if (gameStatus == "WAITING_FOR_PLAYERS") {
   <app-waiting></app-waiting>
-}
-
-@if (gameStatus == "WINNING"){
-  <h1>jUEGO TERMINADO</h1>
 }
