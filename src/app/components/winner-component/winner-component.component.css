@@ -1,0 +1,84 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0; /* Puedes ajustar el color de fondo de la página */
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.form-background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../img/ganador.png');
+  background-size: cover; /* Ajusta la imagen de fondo para cubrir el contenedor */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-position: center; /* Centra la imagen de fondo */
+  padding: 20px; /* Espacio interno del formulario */
+  border-radius: 10px; /* Esquinas redondeadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efecto de sombra */
+  width: 300px; /* Ancho fijo del formulario */
+  height: 500px; /* Alto fijo del formulario */
+  position: relative; /* Para posicionamiento absoluto de elementos hijos */
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between; /* Espacio entre los botones */
+  width: 100%;
+  margin-top: auto; /* Empuja los botones hacia la parte inferior */
+  margin-bottom: auto; /* Empuja los botones hacia la parte superior */
+}
+
+.form-button {
+  padding: 12px 24px; /* Espaciado interno de los botones */
+  font-size: 16px; /* Tamaño de la fuente */
+  font-weight: bold; /* Texto en negrita */
+  border: none; /* Quitar borde por defecto */
+  border-radius: 25px; /* Esquinas redondeadas */
+  background: linear-gradient(45deg, #007bff, #0056b3); /* Gradiente de color de fondo */
+  color: white; /* Color del texto del botón */
+  cursor: pointer; /* Cursor de mano al pasar sobre el botón */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para los botones */
+  transition: all 0.3s ease; /* Transición para un efecto suave al pasar el cursor */
+  flex: 1;
+  margin: 0 5px; /* Espacio entre los botones */
+  max-width: 45%; /* Limita el tamaño máximo de cada botón */
+}
+
+.form-button:hover {
+  background: linear-gradient(45deg, #0056b3, #007bff); /* Inversión de los colores en el gradiente */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Aumenta la sombra al pasar el cursor */
+  transform: translateY(-2px); /* Desplazamiento hacia arriba al pasar el cursor */
+}
+
+.game-id-container {
+  position: absolute;
+  top: 10%; /* Ajusta este valor según sea necesario */
+  width: 100%;
+  text-align: center;
+}
+
+.game-id {
+  color: rgb(51, 48, 48);
+  margin: 0;
+  font-size: 2em; /* Aumenta el tamaño de la fuente */
+  font-weight: bold;
+}
+
+.winner-message {
+  color: #20201e; /* Color dorado para el mensaje */
+  font-size: 1.5em; /* Tamaño de la fuente para el mensaje */
+  font-weight: bold; /* Negrita */
+  margin-top: 10px; /* Espacio superior */
+}
