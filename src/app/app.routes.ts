@@ -37,7 +37,7 @@ export const routes: Routes = [
     component: CantadorStartComponent
   },
   {
-    path: 'winner',
+    path: 'winner/:gameId',
     component: WinnerComponentComponent
   }
 ];
