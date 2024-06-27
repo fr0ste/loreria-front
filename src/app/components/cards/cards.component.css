@@ -1,35 +1,27 @@
 img {
-  height: auto;  /* Ajusta la altura automáticamente */
+  height: 100%;
   width: 100%;
-  max-height: 100%;   /* Asegura que la imagen no se extienda más allá del contenedor */
 }
 
 .card-block {
   position: relative;
-  display: flex;
-  flex-wrap: wrap;  /* Permite que las tarjetas se envuelvan */
-  justify-content: center;
-  width: 100%;
-  height: 100vh;  /* Ocupa toda la altura de la ventana */
-  overflow: hidden;  /* Evita el scroll */
-  padding: 0;
-  margin: 0;
-  list-style: none;  /* Elimina los estilos predeterminados de lista */
 }
 
 li {
-  min-height: 300px;  /* Ajusta la altura mínima para ser más flexible */
-  width: 80%;  /* Ajusta el ancho para adaptarse mejor a la pantalla */
-  max-width: 520px;  /* Limita el ancho máximo */
+  min-height: 700px;
+  width: 520px;
   background: rgb(255, 255, 255);
-  position: relative;  /* Cambiado de absolute a relative para la adaptación */
+  position: absolute;
   text-align: center;
   box-shadow: 0 0 3px 3px rgba(200, 200, 200, 1);
-  margin: 20px;
+  left: 100px;
   transition: all cubic-bezier(0.25, 0.64, 0.09, 0.97) 0.5s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  top: 0;
+  margin-left: -200px;
+}
+
+ul {
+  list-style: none;
 }
 
 .drop {
@@ -39,19 +31,15 @@ li {
 }
 
 h1 {
-  margin-top: 20px;
-  /* Ajusta el margen superior */
+  margin-top: 50px;
   color: #000000;
   text-shadow: 1px 1px 0px #333, 2px 2px #333, 3px 3px 0px #333;
-  min-height: 50px;
-  /* Ajusta la altura mínima */
+  min-height: 150px;
 }
 
 .next-card {
-  margin-top: auto;
-  /* Empuja el botón hacia abajo */
-  margin-bottom: 20px;
-  /* Ajusta el margen inferior */
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
 .div-custom {
@@ -61,28 +49,10 @@ h1 {
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;  /* Centra verticalmente */
-  height: 100vh;  /* Ocupa toda la altura de la ventana */
-  width: 100vw;  /* Ocupa toda la anchura de la ventana */
-  overflow: hidden;  /* Evita el scroll */
 }
+
 
 .next {
   background-color: #04AA6D;
   color: white;
-}
-
-/* Media queries para diferentes tamaños de pantalla */
-@media (max-width: 768px) {
-  li {
-    width: 90%;
-    min-height: 250px;
-  }
-}
-
-@media (max-width: 480px) {
-  li {
-    width: 100%;
-    min-height: 200px;
-  }
 }
