@@ -2,10 +2,11 @@
     <form class="form-background">
         <div class="game-id-container">
             <p class="game-id">Game ID: {{ gameId }}</p>
+            <p class="winner-message">Nombre del jugador: {{ playerName }}</p>
             <p class="winner-message">¡Felicidades! Has ganado</p>
         </div>
         <div class="buttons-container">
-            <button type="button" class="form-button"  (click)="navigateToLobby()">Regreasr al menu</button>
-          </div>
+            <button type="button" class="form-button" (click)="navigateToLobby()">Regresar al menú</button>
+        </div>
     </form>
 </div>
