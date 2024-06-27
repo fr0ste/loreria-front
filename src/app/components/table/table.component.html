@@ -6,13 +6,28 @@
         
         @for (item of deckPlayer; track $index) {
           @if (item.state) {
-            <img [src]="'../../../assets/images/' + item.image + '.jpg'" />
+            <img [src]="'../../../assets/images/' + item.image + '.jpg'" 
+            (click)="marcaCasilla($index)"
+            />
           }@else{
             <img [src]="'../../../assets/images/frijol.jpg'" />
           }
       }
     </div>
     </div>
+
+    <div class="deck-container">
+      <ul class="card-block">
+        <li class="deck-card">
+          <h3>Carta actual: </h3>
+          <div class="card-content">
+            <h3>{{ gamesData.deck.cards[gamesData.deck.cards.length-1].phrase }}</h3>
+            <img [src]="'assets/images/' + gamesData.deck.cards[gamesData.deck.cards.length-1].image + '.jpg'" alt="Imagen" class="deck-image"/>
+          </div>
+        </li>
+      </ul>
+    </div>
+
   </div>
 }
 
@@ -20,6 +35,7 @@
   <app-waiting></app-waiting>
 }
 
-@if (gameStatus == "WINNING"){
-  <h1>jUEGO TERMINADO</h1>
+
+@if(gameStatus == "FINISHED"){
+  <app-winner-component></app-winner-component>
 }

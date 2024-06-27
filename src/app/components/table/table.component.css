@@ -1,138 +1,173 @@
-html{ 
-    
-    font-size: 62.5%;
+.main_container {
+  display: flex;
+  height: 100vh; /* Ajusta la altura del contenedor principal a la altura de la ventana */
 }
 
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    
-    
+.table_container {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-body {
-    background: rgb(254,145,68);
-    background: linear-gradient(180deg, rgba(254,145,68,1) 0%, rgba(247,41,123,1) 100%);
-    height: auto;
-    padding: 3rem;
-    
+.card {
+  width: 100px; /* Ajusta el tamaño según tus necesidades */
+  height: 150px; /* Ajusta el tamaño según tus necesidades */
+  margin: 5px;
 }
 
+.deck_container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px;
+  background-color: #f0f0f0; /* Color de fondo opcional para diferenciar la sección del mazo */
+}
 
 /* header*/
 
 header {
-    text-align: center;
-    margin-top: 5rem;
-    margin-bottom: 5rem;
-    color: #fff;
-    
+  text-align: center;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  color: #fff;
 }
 
 .head_container h1 {
- font-size: 5rem;
- font-weight: bold;
+  font-size: 5rem;
+  font-weight: bold;
 }
 
 .head_container p {
-    font-size: 3rem;
-   }
+  font-size: 3rem;
+}
 
 /* Eleccion de cartas*/
 
-
-.main_container {
-    display: flex;
-    justify-content: space-around;
-}
-
 .card_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .btn {
-    padding: 1.5rem;
-    margin-top:3rem;
-    background-color:#fff;
-    color: black;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border-radius: 1rem;
-    border: none;
-    text-decoration: none;
+  padding: 1.5rem;
+  margin-top: 3rem;
+  background-color: #fff;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  border: none;
+  text-decoration: none;
 }
 
 .btn:hover {
-    background-color:#FE8251;
-    
-    
+  background-color: #fe8251;
 }
 
 .card {
-    display: grid;
-    grid-template-columns: repeat(4, 10rem);
-    grid-gap: 0.4rem;
-    width: 45rem;
-    height: 70rem;
-    justify-content: center;
-    border:2.5rem solid #fff;
-    border-radius: 1rem;
-    background-color: #fff;
-    
-    
+  display: grid;
+  grid-template-columns: repeat(4, 10rem);
+  grid-gap: 0.4rem;
+  width: 45rem;
+  height: 70rem;
+  justify-content: center;
+  border: 2.5rem solid #fff;
+  border-radius: 1rem;
+  background-color: #fff;
 }
 
 .card img {
-    width: 100%;
+  width: 100%;
 }
 
 .card:hover {
-    box-shadow: 1rem 1rem #9E008A;
+  box-shadow: 1rem 1rem #9e008a;
 }
-
 
 /* Estilos segunda página*/
 
 .set_card {
-    width: 45rem;
-    height: 70rem; 
-    border:2.5rem solid #fff;
-    border-radius: 1rem;
-    background-color: #fff;
-    
+  width: 45rem;
+  height: 70rem;
+  border: 2.5rem solid #fff;
+  border-radius: 1rem;
+  background-color: #fff;
 }
 
 .set_card img {
-    width: 100%;
+  width: 100%;
 }
 
 .btn_barajear {
-    padding: 2rem;
-    margin-top:3rem;
-    background-color:#fff;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border-radius: 1rem;
-    border: none;
+  padding: 2rem;
+  margin-top: 3rem;
+  background-color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  border: none;
 }
 
 .btn_barajear:hover {
-    background-color:#FE8251;
-    
-    
+  background-color: #fe8251;
 }
 
 .cards_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #mazo {
-    display: none;
+  display: none;
 }
+
+
+.card-block {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.deck-card {
+  width: 300x;
+  text-align: center;
+  background-color: #ffffff; /* Fondo blanco para las cartas del mazo */
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto más atractivo */
+  transition: transform 0.2s;
+}
+
+.deck-card:hover {
+  transform: scale(1.05); /* Efecto de aumento al pasar el ratón por encima */
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deck-image {
+  width: 200px; /* Ajusta el tamaño según tus necesidades */
+  height: auto;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.deck-card h3 {
+    margin: 0;
+    color: black;
+  }
