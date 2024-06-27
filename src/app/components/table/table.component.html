@@ -6,7 +6,9 @@
         
         @for (item of deckPlayer; track $index) {
           @if (item.state) {
-            <img [src]="'../../../assets/images/' + item.image + '.jpg'" />
+            <img [src]="'../../../assets/images/' + item.image + '.jpg'" 
+            (click)="marcaCasilla($index)"
+            />
           }@else{
             <img [src]="'../../../assets/images/frijol.jpg'" />
           }

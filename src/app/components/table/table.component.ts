@@ -99,7 +99,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  marcaCasilla(idCard: number) {
+  public marcaCasilla(idCard: number) {
     console.log('Marca casilla:', idCard);
   }
 
